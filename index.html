@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pranathi Pulangari — Data Analyst</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0d1b2a;
+    --teal: #1D9E75;
+    --teal-light: #E1F5EE;
+    --teal-mid: #0F6E56;
+    --cream: #f8f5ef;
+    --sand: #e8e2d9;
+    --text: #1a1a1a;
+    --muted: #6b7280;
+    --white: #ffffff;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(248,245,239,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--sand);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 56px;
+  }
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    color: var(--navy);
+    letter-spacing: -0.3px;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--muted); font-size: 13px;
+    font-weight: 500; letter-spacing: 0.3px; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--teal); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: var(--navy);
+    display: flex; align-items: center;
+    padding: 5rem 4rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -100px; right: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(29,158,117,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -50px; left: 20%;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(29,158,117,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner { max-width: 860px; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(29,158,117,0.15);
+    border: 1px solid rgba(29,158,117,0.3);
+    color: #5DCAA5;
+    font-size: 12px; font-weight: 500;
+    padding: 6px 14px; border-radius: 100px;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.5px; text-transform: uppercase;
+  }
+  .hero-badge-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: #1D9E75;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    color: var(--white);
+    line-height: 1.08;
+    letter-spacing: -1.5px;
+    margin-bottom: 0.5rem;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: #5DCAA5;
+  }
+  .hero-tagline {
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 2rem;
+    max-width: 540px;
+    font-weight: 300;
+  }
+  .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--teal);
+    color: white; border: none;
+    padding: 12px 28px; border-radius: 6px;
+    font-size: 14px; font-weight: 500;
+    cursor: pointer; text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--teal-mid); transform: translateY(-1px); }
+  .btn-outline {
+    background: transparent;
+    color: rgba(255,255,255,0.75);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 12px 28px; border-radius: 6px;
+    font-size: 14px; font-weight: 500;
+    cursor: pointer; text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+    display: inline-block;
+  }
+  .btn-outline:hover { border-color: rgba(255,255,255,0.5); color: white; }
+
+  .hero-stats {
+    display: flex; gap: 2.5rem; margin-top: 3rem;
+    padding-top: 3rem; border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .stat-val {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem; color: white; line-height: 1;
+  }
+  .stat-label {
+    font-size: 12px; color: rgba(255,255,255,0.4);
+    text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px;
+  }
+
+  /* SECTIONS */
+  section { padding: 5rem 4rem; }
+  .section-label {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 11px; font-weight: 500; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--teal);
+    margin-bottom: 1rem;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1; max-width: 60px; height: 1px; background: var(--teal);
+    opacity: 0.4;
+  }
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    color: var(--navy);
+    letter-spacing: -0.5px;
+    margin-bottom: 2.5rem;
+    line-height: 1.15;
+  }
+
+  /* ABOUT */
+  #about { background: var(--white); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .about-text p { color: #444; margin-bottom: 1rem; font-size: 15.5px; }
+  .contact-list { list-style: none; margin-top: 1.5rem; }
+  .contact-list li {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 0; border-bottom: 1px solid var(--sand);
+    font-size: 14px; color: #444;
+  }
+  .contact-icon {
+    width: 28px; height: 28px;
+    background: var(--teal-light);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; flex-shrink: 0;
+  }
+  .contact-list a { color: var(--teal); text-decoration: none; }
+  .contact-list a:hover { text-decoration: underline; }
+
+  /* SKILLS */
+  #skills { background: var(--cream); }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+  .skill-card {
+    background: var(--white);
+    border: 1px solid var(--sand);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .skill-card:hover { border-color: var(--teal); transform: translateY(-3px); }
+  .skill-icon { font-size: 24px; margin-bottom: 10px; }
+  .skill-name { font-weight: 500; font-size: 14px; color: var(--navy); margin-bottom: 4px; }
+  .skill-desc { font-size: 12px; color: var(--muted); }
+  .skill-bar-wrap { margin-top: 10px; background: var(--sand); border-radius: 100px; height: 3px; }
+  .skill-bar { height: 3px; border-radius: 100px; background: var(--teal); }
+
+  /* EDUCATION */
+  #education { background: var(--white); }
+  .edu-card {
+    background: var(--cream);
+    border: 1px solid var(--sand);
+    border-left: 4px solid var(--teal);
+    border-radius: 0 12px 12px 0;
+    padding: 1.5rem 2rem;
+    max-width: 680px;
+  }
+  .edu-degree {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.25rem; color: var(--navy);
+    margin-bottom: 0.25rem;
+  }
+  .edu-institute { font-weight: 500; font-size: 14px; color: var(--teal-mid); margin-bottom: 0.5rem; }
+  .edu-detail { font-size: 13px; color: var(--muted); }
+  .edu-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 1rem; }
+  .edu-tag {
+    background: var(--teal-light);
+    color: var(--teal-mid);
+    font-size: 11px; font-weight: 500;
+    padding: 4px 10px; border-radius: 100px;
+    letter-spacing: 0.3px;
+  }
+
+  /* CERTIFICATIONS */
+  #certs { background: var(--navy); }
+  #certs .section-label { color: #5DCAA5; }
+  #certs h2 { color: white; }
+  .cert-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex; align-items: flex-start; gap: 1rem;
+    max-width: 560px;
+    transition: border-color 0.2s;
+  }
+  .cert-card:hover { border-color: rgba(29,158,117,0.5); }
+  .cert-badge {
+    width: 48px; height: 48px; flex-shrink: 0;
+    background: rgba(29,158,117,0.2);
+    border: 1px solid rgba(29,158,117,0.3);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+  }
+  .cert-name {
+    font-weight: 500; font-size: 15px; color: white; margin-bottom: 4px;
+  }
+  .cert-issuer { font-size: 13px; color: rgba(255,255,255,0.45); }
+  .cert-type {
+    display: inline-block; margin-top: 8px;
+    background: rgba(29,158,117,0.15);
+    color: #5DCAA5;
+    font-size: 11px; padding: 3px 10px;
+    border-radius: 100px; letter-spacing: 0.3px;
+  }
+
+  /* PROJECTS */
+  #projects { background: var(--cream); }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+  .project-card {
+    background: var(--white);
+    border: 1px solid var(--sand);
+    border-radius: 14px;
+    padding: 1.5rem;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .project-card:hover { transform: translateY(-4px); border-color: var(--teal); }
+  .project-number {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.5rem; color: var(--sand);
+    line-height: 1; margin-bottom: 0.5rem;
+  }
+  .project-title {
+    font-weight: 500; font-size: 16px; color: var(--navy);
+    margin-bottom: 0.5rem;
+  }
+  .project-desc { font-size: 13.5px; color: var(--muted); margin-bottom: 1rem; line-height: 1.6; }
+  .project-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  .project-tag {
+    background: var(--cream); color: var(--muted);
+    font-size: 11px; font-weight: 500;
+    padding: 3px 9px; border-radius: 4px;
+    border: 1px solid var(--sand);
+  }
+
+  /* CONTACT CTA */
+  #contact {
+    background: var(--teal);
+    text-align: center;
+    padding: 5rem 2rem;
+  }
+  #contact h2 { color: white; margin-bottom: 0.75rem; }
+  #contact p { color: rgba(255,255,255,0.75); max-width: 480px; margin: 0 auto 2rem; }
+  .btn-white {
+    background: white; color: var(--teal-mid);
+    border: none; padding: 13px 32px;
+    border-radius: 6px; font-size: 14px; font-weight: 500;
+    cursor: pointer; text-decoration: none;
+    display: inline-block;
+    transition: transform 0.15s;
+  }
+  .btn-white:hover { transform: translateY(-2px); }
+
+  /* FOOTER */
+  footer {
+    background: var(--navy);
+    text-align: center;
+    padding: 2rem;
+    font-size: 12px; color: rgba(255,255,255,0.25);
+  }
+
+  @media (max-width: 640px) {
+    section { padding: 4rem 1.5rem; }
+    .hero { padding: 5rem 1.5rem 3rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .hero-stats { gap: 1.5rem; }
+    nav { padding: 0 1rem; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">Pranathi Pulangari</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <span class="hero-badge-dot"></span>
+      Open to Data Analyst Roles
+    </div>
+    <h1>Pranathi<br><em>Pulangari</em></h1>
+    <p class="hero-tagline">Data Analyst · Turning raw data into clear, actionable insights using Python, SQL, Excel &amp; Power BI.</p>
+    <div class="hero-ctas">
+      <a href="mailto:pranathireddie03@gmail.com" class="btn-primary">Get in Touch</a>
+      <a href="#skills" class="btn-outline">View My Skills</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-val">4+</div>
+        <div class="stat-label">Core Tools</div>
+      </div>
+      <div>
+        <div class="stat-val">AI</div>
+        <div class="stat-label">Specialisation</div>
+      </div>
+      <div>
+        <div class="stat-val">B.Tech</div>
+        <div class="stat-label">Degree</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-text">
+      <div class="section-label">About Me</div>
+      <h2>Aspiring to make data<br>tell meaningful stories</h2>
+      <p>I'm a fresher Data Analyst based in Hyderabad with a strong foundation in Python, SQL, Excel, and Power BI. I graduated with a B.Tech in Artificial Intelligence and Data Science, equipping me with both the technical depth and the analytical mindset to solve real-world problems.</p>
+      <p>I'm passionate about transforming messy, complex datasets into clear visualisations and actionable insights that drive smarter business decisions. I bring a structured, detail-oriented approach to every dataset I work with.</p>
+      <p>Currently seeking entry-level opportunities where I can contribute, grow, and make a measurable impact in a data-driven team.</p>
+    </div>
+    <div class="about-contact">
+      <div class="section-label">Contact</div>
+      <ul class="contact-list">
+        <li>
+          <span class="contact-icon">📍</span>
+          Hyderabad, Telangana, India
+        </li>
+        <li>
+          <span class="contact-icon">📞</span>
+          <a href="tel:7396382342">+91 7396382342</a>
+        </li>
+        <li>
+          <span class="contact-icon">✉️</span>
+          <a href="mailto:pranathireddie03@gmail.com">pranathireddie03@gmail.com</a>
+        </li>
+        <li>
+          <span class="contact-icon">🔗</span>
+          <a href="https://www.linkedin.com/in/pranathipulangari-8783b82a7" target="_blank">LinkedIn Profile</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">Technical Expertise</div>
+  <h2>Skills &amp; Tools</h2>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-icon">🐍</div>
+      <div class="skill-name">Python</div>
+      <div class="skill-desc">Data analysis, automation &amp; scripting</div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width:75%"></div></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🗄️</div>
+      <div class="skill-name">SQL</div>
+      <div class="skill-desc">Database queries &amp; data extraction</div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width:78%"></div></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">📊</div>
+      <div class="skill-name">Microsoft Excel</div>
+      <div class="skill-desc">Advanced formulas, pivot tables &amp; dashboards</div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width:85%"></div></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">📈</div>
+      <div class="skill-name">Power BI</div>
+      <div class="skill-desc">Visual analytics &amp; interactive reporting</div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width:70%"></div></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🤖</div>
+      <div class="skill-name">Artificial Intelligence</div>
+      <div class="skill-desc">GenAI applications &amp; AI-driven analytics</div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width:68%"></div></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🗣️</div>
+      <div class="skill-name">Communication</div>
+      <div class="skill-desc">Presenting insights to stakeholders clearly</div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width:80%"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-label">Academic Background</div>
+  <h2>Education</h2>
+  <div class="edu-card">
+    <div class="edu-degree">Bachelor of Technology (B.Tech)</div>
+    <div class="edu-institute">Vignan Institute of Management and Technology</div>
+    <div class="edu-detail">Artificial Intelligence &amp; Data Science · Batch of 2021</div>
+    <div class="edu-tags">
+      <span class="edu-tag">Artificial Intelligence</span>
+      <span class="edu-tag">Data Science</span>
+      <span class="edu-tag">Machine Learning</span>
+      <span class="edu-tag">Python Programming</span>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certs">
+  <div class="section-label">Credentials</div>
+  <h2>Certifications</h2>
+  <div class="cert-card">
+    <div class="cert-badge">🏅</div>
+    <div>
+      <div class="cert-name">GenAI Powered Data Analytics Job Simulation</div>
+      <div class="cert-issuer">Issued by Tata Group (via Forage)</div>
+      <span class="cert-type">Industry Simulation · Verified</span>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">Portfolio</div>
+  <h2>Academic &amp; Personal Projects</h2>
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-number">01</div>
+      <div class="project-title">GenAI-Powered Data Analytics Simulation</div>
+      <div class="project-desc">Completed Tata Group's job simulation involving end-to-end data analysis tasks powered by Generative AI — from data cleaning to deriving business insights.</div>
+      <div class="project-tags">
+        <span class="project-tag">Python</span>
+        <span class="project-tag">GenAI</span>
+        <span class="project-tag">Data Analytics</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-number">02</div>
+      <div class="project-title">AI &amp; Data Science Capstone</div>
+      <div class="project-desc">Final year B.Tech project applying machine learning techniques and data analysis to solve a domain-specific problem, from data acquisition through modelling to reporting.</div>
+      <div class="project-tags">
+        <span class="project-tag">ML</span>
+        <span class="project-tag">Python</span>
+        <span class="project-tag">Data Visualisation</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-number">03</div>
+      <div class="project-title">Interactive Reporting Dashboard</div>
+      <div class="project-desc">Built Power BI dashboards to visualise key metrics and trends, demonstrating the ability to translate raw data into clear, decision-ready visual reports for stakeholders.</div>
+      <div class="project-tags">
+        <span class="project-tag">Power BI</span>
+        <span class="project-tag">SQL</span>
+        <span class="project-tag">Excel</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT CTA -->
+<section id="contact">
+  <h2>Let's Connect</h2>
+  <p>I'm actively seeking entry-level Data Analyst opportunities. If you're looking for a motivated, detail-driven analyst, I'd love to hear from you.</p>
+  <a href="mailto:pranathireddie03@gmail.com" class="btn-white">Send me an Email</a>
+</section>
+
+<footer>
+  <p>&copy; 2024 Pranathi Pulangari &middot; Data Analyst &middot; Hyderabad, India</p>
+</footer>
+
+</body>
+</html>
